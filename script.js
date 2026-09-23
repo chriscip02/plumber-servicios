@@ -154,3 +154,94 @@ galleryPrev.addEventListener("click", () => {
 window.addEventListener("resize", updateGallery);
 
 updateGallery();
+
+/* =========================================
+   GOOGLE ANALYTICS - CONTACTOS
+========================================= */
+
+function trackContactEvent(eventName, contactMethod, location) {
+
+    if (typeof gtag === "function") {
+
+        gtag("event", eventName, {
+            contact_method: contactMethod,
+            contact_location: location
+        });
+
+    }
+
+}
+
+
+/* Detectamos desde qué parte de la web
+   se hizo clic en WhatsApp */
+
+function getContactLocation(link) {
+
+    if (link.classList.contains("floating-whatsapp")) {
+        return "floating_button";
+    }
+
+    if (link.classList.contains("btn-header")) {
+        return "header";
+    }
+
+    const section = link.closest("section");
+
+    if (section && section.id) {
+        return section.id;
+    }
+
+    return "other";
+}
+
+
+/* WHATSAPP */
+
+document.querySelectorAll(".whatsapp-link").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        trackContactEvent(
+            "whatsapp_click",
+            "whatsapp",
+            getContactLocation(link)
+        );
+
+    });
+
+});
+
+
+/* TELÉFONO */
+
+document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        trackContactEvent(
+            "phone_click",
+            "phone",
+            getContactLocation(link)
+        );
+
+    });
+
+});
+
+
+/* EMAIL */
+
+document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        trackContactEvent(
+            "email_click",
+            "email",
+            getContactLocation(link)
+        );
+
+    });
+
+});
