@@ -82,17 +82,16 @@ let galleryIndex = 0;
 
 function getVisibleSlides() {
 
-    if (window.innerWidth <= 780) {
+    if (window.matchMedia("(max-width: 780px)").matches) {
         return 1;
     }
 
-    if (window.innerWidth <= 1050) {
+    if (window.matchMedia("(max-width: 1050px)").matches) {
         return 2;
     }
 
     return 3;
 }
-
 
 function updateGallery() {
 
@@ -151,9 +150,23 @@ galleryPrev.addEventListener("click", () => {
 });
 
 
-window.addEventListener("resize", updateGallery);
+let galleryResizeFrame = null;
 
-updateGallery();
+function scheduleGalleryUpdate() {
+
+    if (galleryResizeFrame !== null) {
+        cancelAnimationFrame(galleryResizeFrame);
+    }
+
+    galleryResizeFrame = requestAnimationFrame(() => {
+        updateGallery();
+        galleryResizeFrame = null;
+    });
+}
+
+window.addEventListener("resize", scheduleGalleryUpdate);
+
+requestAnimationFrame(updateGallery);
 
 /* =========================================
    GOOGLE ANALYTICS - CONTACTOS
