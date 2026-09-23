@@ -610,10 +610,20 @@ button {
 
     background-color: #e8f1f7;
 
-    background-image: url("./img/consorcios-plumber.jpg");
-    background-size: calc(100% - 40px) auto;
-    background-position: center;
-    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.consorcios-image img {
+    position: absolute;
+
+    inset: 20px;
+
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+
+    object-fit: contain;
+
+    display: block;
 }
 
 .consorcios-image::after {
