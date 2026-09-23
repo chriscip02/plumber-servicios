@@ -626,16 +626,16 @@ background-image:
     overflow: hidden;
 }
 
-.consorcios-image img {
+.consorcios-image picture {
     position: absolute;
-
     inset: 20px;
+    display: block;
+}
 
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
-
+.consorcios-image img {
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-
     display: block;
 }
 

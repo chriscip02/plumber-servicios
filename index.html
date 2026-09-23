@@ -402,14 +402,25 @@
         <section class="consorcios" id="consorcios">
 
             <div class="consorcios-image">
-                <img
-                    src="img/consorcios-plumber.jpg"
-                    alt=""
-                    width="1536"
-                    height="1024"
-                    loading="lazy"
-                    decoding="async"
-                >
+                <picture>
+                    <source
+                        type="image/webp"
+                        srcset="
+                            img/consorcios-plumber-640.webp 640w,
+                            img/consorcios-plumber-1200.webp 1200w
+                        "
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                    >
+            
+                    <img
+                        src="img/consorcios-plumber.jpg"
+                        alt=""
+                        width="1536"
+                        height="1024"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                </picture>
             </div>
 
             <div class="consorcios-content">
