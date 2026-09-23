@@ -1432,3 +1432,23 @@ background-image:
         height: 54px;
     }
 }
+
+/* =====================================================
+   ACCESIBILIDAD - CONTRASTE
+===================================================== */
+
+.btn-header,
+.btn-primary {
+    background: var(--blue-dark);
+}
+
+.btn-whatsapp {
+    background: #0f7a3a;
+}
+
+.eyebrow.blue,
+.section-heading h2 span,
+.consorcios h2 span,
+.gallery-instagram {
+    color: #c94f00;
+}
