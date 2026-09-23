@@ -273,7 +273,7 @@ button {
             rgba(5, 40, 79, 0.48) 72%,
             rgba(5, 40, 79, 0.25) 100%
         ),
-        url("img/hero-plumber.png");
+        url("img/hero-plumber.jpg");
 
     background-size: cover;
     background-position: center center;
@@ -603,14 +603,6 @@ button {
 }
 
 
-/*
-   IMPORTANTE:
-   El archivo debe estar dentro de la carpeta "img"
-   con este nombre exacto:
-
-   consorcios-plumber.png
-*/
-
 .consorcios-image {
     position: relative;
 
@@ -618,7 +610,7 @@ button {
 
     background-color: #e8f1f7;
 
-    background-image: url("./img/consorcios-plumber.png");
+    background-image: url("./img/consorcios-plumber.jpg");
     background-size: calc(100% - 40px) auto;
     background-position: center;
     background-repeat: no-repeat;
