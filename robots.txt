@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://plumberservicios.com.ar/sitemap.xml
