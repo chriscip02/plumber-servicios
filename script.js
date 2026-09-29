@@ -15,7 +15,7 @@ const plumberData = {
    WHATSAPP
 ========================================= */
 
-const whatsappMessage =
+const whatsappMessage = document.body.dataset.whatsappMessage ||
     "Hola, me contacto desde la página de Plumber Servicios. Quisiera consultar por un trabajo de plomería o gas.";
 
 const whatsappURL =
@@ -36,9 +36,26 @@ document.querySelectorAll(".whatsapp-link").forEach(link => {
 const menuToggle = document.getElementById("menuToggle");
 const nav = document.getElementById("nav");
 
-menuToggle.addEventListener("click", () => {
-    nav.classList.toggle("active");
-});
+function setMenuOpen(open) {
+    if (!menuToggle || !nav) return;
+    nav.classList.toggle("active", open);
+    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+}
+if (menuToggle && nav) {
+    menuToggle.setAttribute("aria-controls", "nav");
+    setMenuOpen(false);
+    menuToggle.addEventListener("click", () => setMenuOpen(!nav.classList.contains("active")));
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && nav.classList.contains("active")) {
+            setMenuOpen(false);
+            menuToggle.focus();
+        }
+    });
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 780) setMenuOpen(false);
+    });
+}
 
 
 /* Cerramos el menú al tocar una opción */
@@ -46,7 +63,7 @@ menuToggle.addEventListener("click", () => {
 document.querySelectorAll(".nav a").forEach(link => {
 
     link.addEventListener("click", () => {
-        nav.classList.remove("active");
+        setMenuOpen(false);
     });
 
 });
@@ -59,6 +76,8 @@ document.querySelectorAll(".nav a").forEach(link => {
 const header = document.querySelector(".header");
 
 window.addEventListener("scroll", () => {
+
+    if (!header) return;
 
     if (window.scrollY > 30) {
         header.classList.add("scrolled");
@@ -95,6 +114,8 @@ function getVisibleSlides() {
 
 function updateGallery() {
 
+    if (!galleryTrack || !gallerySlides.length) return;
+
     const visibleSlides = getVisibleSlides();
 
     const maxIndex =
@@ -114,7 +135,7 @@ function updateGallery() {
 }
 
 
-galleryNext.addEventListener("click", () => {
+galleryNext?.addEventListener("click", () => {
 
     const visibleSlides = getVisibleSlides();
 
@@ -132,7 +153,7 @@ galleryNext.addEventListener("click", () => {
 });
 
 
-galleryPrev.addEventListener("click", () => {
+galleryPrev?.addEventListener("click", () => {
 
     const visibleSlides = getVisibleSlides();
 
@@ -178,7 +199,8 @@ function trackContactEvent(eventName, contactMethod, location) {
 
         gtag("event", eventName, {
             contact_method: contactMethod,
-            contact_location: location
+            contact_location: location,
+            ...(document.body.dataset.service ? { service: document.body.dataset.service } : {})
         });
 
     }
@@ -229,6 +251,8 @@ document.querySelectorAll(".whatsapp-link").forEach(link => {
 /* TELÉFONO */
 
 document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+    // MetroGAS es un contacto de emergencia externo, no una consulta a Plumber.
+    if (link.dataset.contactType === "emergency") return;
 
     link.addEventListener("click", () => {
 
