@@ -1,0 +1,6 @@
+/* Ajustes exclusivos de /reparacion-canerias-agua/. */
+.landing-canerias .lp-breadcrumb ol { flex-wrap: wrap; row-gap: 8px; }
+.landing-canerias .canerias-lista { margin-top: 14px; padding-left: 22px; color: var(--lp-muted); line-height: 1.7; }
+.landing-canerias .canerias-lista li + li { margin-top: 8px; }
+.landing-canerias .lp-steps li > div { min-width: 0; }
+.landing-canerias .lp-steps li > span { flex-shrink: 0; }
